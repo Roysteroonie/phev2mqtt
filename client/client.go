@@ -237,13 +237,13 @@ func (c *Client) nextRecvMsg(deadline time.Time) (*protocol.PhevMessage, error) 
 // Sends periodic pings to the car.
 func (c *Client) pinger() {
 	pingSeq := byte(0xa)
-	ticker := time.NewTicker(200 * time.Millisecond)
+	ticker := time.NewTicker(30 * time.Second)
 	defer ticker.Stop()
 	for t := range ticker.C {
 		switch {
 		case c.closed:
 			return
-		case t.Sub(c.lastRx) < 500*time.Millisecond:
+		case t.Sub(c.lastRx) < 45*time.Second:
 			continue
 		}
 		c.Send <- protocol.NewPingRequestMessage(pingSeq)
