@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/buxtronix/Roysteroonie/protocol"
+	"github.com/Roysteroonie/phev2mqtt/protocol"
 )
 
 const DefaultAddress = "192.168.8.46:8080"
