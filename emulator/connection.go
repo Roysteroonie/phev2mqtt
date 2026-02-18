@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/buxtronix/phev2mqtt/client"
-	"github.com/buxtronix/phev2mqtt/protocol"
+	"github.com/Roysteroonie/phev2mqtt/client"
+	"github.com/Roysteroonie/phev2mqtt/protocol"
 )
 
 type connState int
