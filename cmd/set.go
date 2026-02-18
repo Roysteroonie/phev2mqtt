@@ -21,7 +21,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/buxtronix/phev2mqtt/client"
+	"github.com/Roysteroonie/phev2mqtt/client"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
