@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 package main
 
-import "github.com/buxtronix/phev2mqtt/cmd"
+import "github.com/Roysteroonie/phev2mqtt/cmd"
 
 func main() {
 	cmd.Execute()
