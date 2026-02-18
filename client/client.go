@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/buxtronix/phev2mqtt/protocol"
+	"github.com/buxtronix/Roysteroonie/protocol"
 )
 
 const DefaultAddress = "192.168.8.46:8080"
@@ -160,7 +160,7 @@ func (c *Client) Connect() error {
 	return nil
 }
 
-var startTimeout = 20 * time.Second
+var startTimeout = 45 * time.Second
 
 // Start waits for the client to start.
 func (c *Client) Start() error {
@@ -237,7 +237,7 @@ func (c *Client) nextRecvMsg(deadline time.Time) (*protocol.PhevMessage, error) 
 // Sends periodic pings to the car.
 func (c *Client) pinger() {
 	pingSeq := byte(0xa)
-	ticker := time.NewTicker(30 * time.Second)
+	ticker := time.NewTicker(45 * time.Second)
 	defer ticker.Stop()
 	for t := range ticker.C {
 		switch {
@@ -307,7 +307,7 @@ func (c *Client) manage() {
 
 func (c *Client) reader() {
 	for {
-		c.conn.(*net.TCPConn).SetReadDeadline(time.Now().Add(30 * time.Second))
+		c.conn.(*net.TCPConn).SetReadDeadline(time.Now().Add(45 * time.Second))
 		data := make([]byte, 4096)
 		n, err := c.conn.Read(data)
 		if err != nil {
@@ -352,7 +352,7 @@ func (c *Client) writer() {
 			data := msg.EncodeToBytes(c.key)
 			log.Debugf("%%PHEV_TCP_SEND_MSG%%: [%02x] %s", msg.Xor, msg.ShortForm())
 			log.Tracef("%%PHEV_TCP_SEND_DATA%%: %s", hex.EncodeToString(data))
-			c.conn.(*net.TCPConn).SetWriteDeadline(time.Now().Add(15 * time.Second))
+			c.conn.(*net.TCPConn).SetWriteDeadline(time.Now().Add(45 * time.Second))
 			if _, err := c.conn.Write(data); err != nil {
 				if !c.closed {
 					log.Errorf("%%PHEV_TCP_WRITER_ERROR%%: %v", err)
